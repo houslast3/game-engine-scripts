@@ -1,0 +1,172 @@
+/* Assets Panel Styles */
+.assets-content {
+    padding: 5px;
+}
+
+.assets-toolbar {
+    padding: 5px;
+    background-color: #2d2d2d;
+    border-bottom: 1px solid #3d3d3d;
+    display: flex;
+    gap: 5px;
+}
+
+.assets-search {
+    flex: 1;
+}
+
+.assets-search input {
+    width: 100%;
+    background: #3d3d3d;
+    border: 1px solid #4d4d4d;
+    color: #ffffff;
+    padding: 4px 8px;
+    border-radius: 3px;
+}
+
+.assets-view-toggle {
+    display: flex;
+    gap: 2px;
+}
+
+.assets-view-toggle button {
+    background: #3d3d3d;
+    border: 1px solid #4d4d4d;
+    color: #ffffff;
+    padding: 4px 8px;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.assets-view-toggle button.active {
+    background: #0066cc;
+}
+
+/* Grid View */
+.assets-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    gap: 10px;
+    padding: 10px;
+}
+
+.asset-item {
+    background: #2d2d2d;
+    border: 1px solid #3d3d3d;
+    border-radius: 3px;
+    overflow: hidden;
+    cursor: pointer;
+    user-select: none;
+}
+
+.asset-item:hover {
+    border-color: #4d4d4d;
+}
+
+.asset-item.selected {
+    border-color: #0066cc;
+    background: #2d2d2d;
+}
+
+.asset-preview {
+    width: 100%;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #252525;
+}
+
+.asset-preview img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.asset-label {
+    padding: 5px;
+    font-size: 12px;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* List View */
+.assets-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.asset-list-item {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    cursor: pointer;
+    user-select: none;
+    border-radius: 3px;
+}
+
+.asset-list-item:hover {
+    background-color: #3d3d3d;
+}
+
+.asset-list-item.selected {
+    background-color: #0066cc;
+}
+
+.asset-list-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.asset-list-details {
+    flex: 1;
+}
+
+.asset-list-name {
+    font-size: 14px;
+}
+
+.asset-list-info {
+    font-size: 12px;
+    color: #888888;
+}
+
+/* Context Menu */
+.asset-context-menu {
+    position: fixed;
+    background: #2d2d2d;
+    border: 1px solid #3d3d3d;
+    border-radius: 3px;
+    padding: 5px;
+    min-width: 150px;
+    z-index: 1000;
+}
+
+.asset-context-menu-item {
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.asset-context-menu-item:hover {
+    background-color: #3d3d3d;
+}
+
+/* Drag and Drop */
+.asset-drag-preview {
+    position: fixed;
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.7;
+}
+
+.asset-drop-indicator {
+    position: absolute;
+    background: #0066cc;
+    transition: all 0.2s ease;
+}

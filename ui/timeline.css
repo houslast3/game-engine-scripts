@@ -1,0 +1,182 @@
+/* Timeline Panel Styles */
+.timeline-panel {
+    display: flex;
+    flex-direction: column;
+}
+
+.timeline-toolbar {
+    padding: 5px;
+    background-color: #2d2d2d;
+    border-bottom: 1px solid #3d3d3d;
+    display: flex;
+    gap: 5px;
+}
+
+.timeline-content {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+}
+
+/* Timeline Tracks */
+.timeline-tracks {
+    flex: 1;
+    overflow: auto;
+    position: relative;
+}
+
+.timeline-track {
+    height: 30px;
+    border-bottom: 1px solid #3d3d3d;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.track-header {
+    width: 150px;
+    padding: 0 10px;
+    background: #2d2d2d;
+    border-right: 1px solid #3d3d3d;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    user-select: none;
+}
+
+.track-content {
+    flex: 1;
+    height: 100%;
+    position: relative;
+    background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAFElEQVQYV2NkYGD4z4AGGBkZGRkAJAgCBGYCyicAAAAASUVORK5CYII=') repeat;
+}
+
+/* Timeline Keyframes */
+.keyframe {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: #ffffff;
+    border: 1px solid #000000;
+    transform: rotate(45deg);
+    cursor: pointer;
+    top: 50%;
+    margin-top: -5px;
+}
+
+.keyframe:hover {
+    background: #ffff00;
+}
+
+.keyframe.selected {
+    background: #00ff00;
+    border-color: #008800;
+}
+
+/* Timeline Ruler */
+.timeline-ruler {
+    height: 20px;
+    background: #2d2d2d;
+    border-bottom: 1px solid #3d3d3d;
+    position: relative;
+    overflow: hidden;
+}
+
+.ruler-marks {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.ruler-mark {
+    position: absolute;
+    top: 0;
+    width: 1px;
+    height: 50%;
+    background: #666666;
+}
+
+.ruler-mark.major {
+    height: 100%;
+}
+
+.ruler-label {
+    position: absolute;
+    bottom: 2px;
+    transform: translateX(-50%);
+    font-size: 10px;
+    color: #888888;
+}
+
+/* Timeline Playhead */
+.timeline-playhead {
+    position: absolute;
+    top: 0;
+    width: 1px;
+    height: 100%;
+    background: #ff0000;
+    pointer-events: none;
+    z-index: 1000;
+}
+
+.playhead-handle {
+    width: 10px;
+    height: 10px;
+    background: #ff0000;
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    cursor: ew-resize;
+    pointer-events: all;
+}
+
+/* Timeline Selection */
+.timeline-selection {
+    position: absolute;
+    height: 100%;
+    background: rgba(0, 102, 204, 0.3);
+    border: 1px solid #0066cc;
+    pointer-events: none;
+}
+
+/* Timeline Zoom */
+.timeline-zoom {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 0 10px;
+}
+
+.timeline-zoom input {
+    width: 100px;
+}
+
+/* Timeline Controls */
+.timeline-controls {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.timeline-control-button {
+    width: 24px;
+    height: 24px;
+    background: #3d3d3d;
+    border: 1px solid #4d4d4d;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.timeline-control-button:hover {
+    background: #4d4d4d;
+}
+
+.timeline-control-button.active {
+    background: #0066cc;
+}

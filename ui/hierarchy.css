@@ -1,0 +1,114 @@
+/* Hierarchy Panel Styles */
+.hierarchy-content {
+    padding: 5px;
+}
+
+.hierarchy-item {
+    display: flex;
+    align-items: center;
+    padding: 3px 5px;
+    cursor: pointer;
+    border-radius: 3px;
+    user-select: none;
+}
+
+.hierarchy-item:hover {
+    background-color: #3d3d3d;
+}
+
+.hierarchy-item.selected {
+    background-color: #0066cc;
+}
+
+.hierarchy-item-toggle {
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 5px;
+    color: #888888;
+    cursor: pointer;
+}
+
+.hierarchy-item-toggle:hover {
+    color: #ffffff;
+}
+
+.hierarchy-item-icon {
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hierarchy-item-label {
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.hierarchy-item-buttons {
+    display: none;
+    gap: 5px;
+}
+
+.hierarchy-item:hover .hierarchy-item-buttons {
+    display: flex;
+}
+
+.hierarchy-item-button {
+    width: 16px;
+    height: 16px;
+    background: none;
+    border: none;
+    color: #888888;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+.hierarchy-item-button:hover {
+    color: #ffffff;
+}
+
+.hierarchy-children {
+    margin-left: 20px;
+}
+
+.hierarchy-drag-indicator {
+    height: 2px;
+    background-color: #0066cc;
+    margin: 2px 0;
+}
+
+.hierarchy-drag-over {
+    background-color: #2d2d2d;
+    outline: 1px solid #0066cc;
+}
+
+.hierarchy-empty {
+    padding: 20px;
+    text-align: center;
+    color: #888888;
+}
+
+.hierarchy-search {
+    padding: 5px;
+    background-color: #2d2d2d;
+    border-bottom: 1px solid #3d3d3d;
+}
+
+.hierarchy-search input {
+    width: 100%;
+    background: #3d3d3d;
+    border: 1px solid #4d4d4d;
+    color: #ffffff;
+    padding: 4px 8px;
+    border-radius: 3px;
+}

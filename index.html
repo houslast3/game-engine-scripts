@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Engine Editor</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #1e1e1e;
+            font-family: Arial, sans-serif;
+            color: #ffffff;
+        }
+
+        .editor-container {
+            display: flex;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .sidebar {
+            width: 250px;
+            background-color: #252526;
+            border-right: 1px solid #3c3c3c;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .game-viewport {
+            flex: 1;
+            background-color: #333333;
+            position: relative;
+        }
+
+        .timeline {
+            height: 150px;
+            background-color: #252526;
+            border-top: 1px solid #3c3c3c;
+            padding: 10px;
+        }
+
+        .toolbar {
+            height: 40px;
+            background-color: #2d2d2d;
+            border-bottom: 1px solid #3c3c3c;
+            display: flex;
+            align-items: center;
+            padding: 0 10px;
+        }
+
+        .button {
+            padding: 8px 15px;
+            background-color: #0066cc;
+            border: none;
+            color: white;
+            border-radius: 3px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        .button:hover {
+            background-color: #0077ee;
+        }
+
+        .panel {
+            background-color: #2d2d2d;
+            border-radius: 3px;
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+
+        .panel-header {
+            padding: 8px;
+            background-color: #3c3c3c;
+            font-weight: bold;
+        }
+
+        .panel-content {
+            padding: 8px;
+        }
+
+        .resource-item {
+            padding: 5px;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+
+        .resource-item:hover {
+            background-color: #3c3c3c;
+        }
+
+        #console-output {
+            height: 150px;
+            background-color: #1e1e1e;
+            border: 1px solid #3c3c3c;
+            margin-top: 10px;
+            padding: 5px;
+            font-family: monospace;
+            overflow-y: auto;
+        }
+
+        .property-grid {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 5px;
+            padding: 5px;
+        }
+
+        .property-label {
+            color: #9cdcfe;
+        }
+
+        .property-input {
+            background-color: #3c3c3c;
+            border: 1px solid #555555;
+            color: white;
+            padding: 2px 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="editor-container">
+        <div class="sidebar">
+            <div class="panel">
+                <div class="panel-header">Recursos</div>
+                <div class="panel-content" id="resources-list">
+                    <!-- Lista de recursos será preenchida dinamicamente -->
+                </div>
+            </div>
+            <div class="panel">
+                <div class="panel-header">Propriedades</div>
+                <div class="panel-content">
+                    <div class="property-grid" id="properties-panel">
+                        <!-- Propriedades serão preenchidas dinamicamente -->
+                    </div>
+                </div>
+            </div>
+            <div id="console-output">
+                <!-- Saída do console será preenchida dinamicamente -->
+            </div>
+        </div>
+        
+        <div class="main-content">
+            <div class="toolbar">
+                <button class="button" id="play-button">▶ Play</button>
+                <button class="button" id="stop-button">⬛ Stop</button>
+                <button class="button" id="save-button">💾 Save</button>
+                <button class="button" id="export-button">📤 Export</button>
+            </div>
+            
+            <div class="game-viewport" id="game-viewport">
+                <!-- Viewport do jogo -->
+            </div>
+            
+            <div class="timeline">
+                <!-- Timeline será implementada aqui -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Engine Core -->
+    <script src="engine/core.js"></script>
+    <script src="engine/renderer.js"></script>
+    <script src="engine/physics.js"></script>
+    <script src="engine/input.js"></script>
+    <script src="engine/audio.js"></script>
+    <script src="engine/scene.js"></script>
+    <script src="engine/sprite-manager.js"></script>
+    <script src="engine/animation.js"></script>
+    
+    <!-- Engine Support Systems -->
+    <script src="engine/save-system.js"></script>
+    <script src="engine/resource-manager.js"></script>
+    <script src="engine/preview-system.js"></script>
+    <script src="engine/game-exporter.js"></script>
+    <script src="engine/network-manager.js"></script>
+
+    <!-- Editor Scripts -->
+    <script>
+        // Inicializa a engine
+        const engine = new GameEngine();
+        
+        // Configuração inicial
+        let isPlaying = false;
+        let selectedObject = null;
+
+        // Elementos DOM
+        const playButton = document.getElementById('play-button');
+        const stopButton = document.getElementById('stop-button');
+        const saveButton = document.getElementById('save-button');
+        const exportButton = document.getElementById('export-button');
+        const consoleOutput = document.getElementById('console-output');
+        const resourcesList = document.getElementById('resources-list');
+        const propertiesPanel = document.getElementById('properties-panel');
+        const gameViewport = document.getElementById('game-viewport');
+
+        // Console personalizado
+        const customConsole = {
+            log: function(message) {
+                const line = document.createElement('div');
+                line.textContent = `[LOG] ${message}`;
+                consoleOutput.appendChild(line);
+                consoleOutput.scrollTop = consoleOutput.scrollHeight;
+                console.log(message);
+            },
+            error: function(message) {
+                const line = document.createElement('div');
+                line.textContent = `[ERROR] ${message}`;
+                line.style.color = '#ff5555';
+                consoleOutput.appendChild(line);
+                consoleOutput.scrollTop = consoleOutput.scrollHeight;
+                console.error(message);
+            }
+        };
+
+        // Event Listeners
+        playButton.addEventListener('click', () => {
+            isPlaying = !isPlaying;
+            playButton.textContent = isPlaying ? '⏸ Pause' : '▶ Play';
+            if (isPlaying) {
+                engine.start();
+                customConsole.log('Engine started');
+            } else {
+                engine.pause();
+                customConsole.log('Engine paused');
+            }
+        });
+
+        stopButton.addEventListener('click', () => {
+            isPlaying = false;
+            playButton.textContent = '▶ Play';
+            engine.stop();
+            customConsole.log('Engine stopped');
+        });
+
+        saveButton.addEventListener('click', async () => {
+            try {
+                await engine.network.saveGame(engine.exportState());
+                customConsole.log('Game state saved');
+            } catch (error) {
+                customConsole.error('Failed to save game state: ' + error.message);
+            }
+        });
+
+        exportButton.addEventListener('click', async () => {
+            try {
+                await engine.network.exportGame({
+                    name: 'MyGame',
+                    scenes: engine.scenes,
+                    resources: engine.resources
+                });
+                customConsole.log('Game exported successfully');
+            } catch (error) {
+                customConsole.error('Failed to export game: ' + error.message);
+            }
+        });
+
+        // Atualiza a lista de recursos
+        function updateResourcesList() {
+            resourcesList.innerHTML = '';
+            engine.resourceManager.getAllResources().forEach(resource => {
+                const item = document.createElement('div');
+                item.className = 'resource-item';
+                item.textContent = resource.name;
+                item.onclick = () => selectResource(resource);
+                resourcesList.appendChild(item);
+            });
+        }
+
+        // Seleciona um recurso
+        function selectResource(resource) {
+            selectedObject = resource;
+            updatePropertiesPanel();
+        }
+
+        // Atualiza o painel de propriedades
+        function updatePropertiesPanel() {
+            propertiesPanel.innerHTML = '';
+            if (!selectedObject) return;
+
+            Object.entries(selectedObject).forEach(([key, value]) => {
+                if (typeof value !== 'function') {
+                    const label = document.createElement('div');
+                    label.className = 'property-label';
+                    label.textContent = key;
+
+                    const input = document.createElement('input');
+                    input.className = 'property-input';
+                    input.value = value;
+                    input.onchange = (e) => {
+                        selectedObject[key] = e.target.value;
+                        engine.events.emit('objectModified', selectedObject);
+                    };
+
+                    propertiesPanel.appendChild(label);
+                    propertiesPanel.appendChild(input);
+                }
+            });
+        }
+
+        // Inicialização
+        window.addEventListener('load', () => {
+            engine.init();
+            updateResourcesList();
+            customConsole.log('Editor initialized');
+        });
+
+        // Eventos da engine
+        engine.events.on('resourceAdded', updateResourcesList);
+        engine.events.on('resourceRemoved', updateResourcesList);
+        engine.events.on('error', (error) => customConsole.error(error.message));
+    </script>
+</body>
+</html>

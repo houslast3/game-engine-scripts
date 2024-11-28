@@ -1,0 +1,81 @@
+/* Editor Styles */
+.editor-viewport {
+    position: relative;
+}
+
+.editor-viewport canvas {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.editor-grid {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    opacity: 0.1;
+    background-image: 
+        linear-gradient(to right, #fff 1px, transparent 1px),
+        linear-gradient(to bottom, #fff 1px, transparent 1px);
+    background-size: 20px 20px;
+}
+
+.editor-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.editor-gizmo {
+    position: absolute;
+    pointer-events: all;
+    cursor: move;
+}
+
+.editor-gizmo-handle {
+    width: 10px;
+    height: 10px;
+    background: #fff;
+    border: 1px solid #000;
+    position: absolute;
+}
+
+.editor-gizmo-rotate {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #00ff00;
+    border-radius: 50%;
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: pointer;
+}
+
+.editor-gizmo-scale {
+    width: 10px;
+    height: 10px;
+    background: #ffff00;
+    position: absolute;
+    cursor: nw-resize;
+}
+
+.editor-selection {
+    position: absolute;
+    border: 2px solid #00ff00;
+    pointer-events: none;
+}
+
+.editor-guides {
+    position: absolute;
+    background: #00ff00;
+    pointer-events: none;
+    opacity: 0.5;
+}

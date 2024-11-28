@@ -1,0 +1,165 @@
+/* Console Panel Styles */
+.console-panel {
+    display: flex;
+    flex-direction: column;
+}
+
+.console-content {
+    flex: 1;
+    overflow-y: auto;
+    font-family: 'Consolas', monospace;
+    font-size: 12px;
+    line-height: 1.4;
+    padding: 10px;
+}
+
+.console-line {
+    display: flex;
+    margin-bottom: 2px;
+}
+
+.console-timestamp {
+    color: #888888;
+    margin-right: 10px;
+    user-select: none;
+}
+
+.console-type {
+    margin-right: 10px;
+    user-select: none;
+}
+
+.console-type-log {
+    color: #ffffff;
+}
+
+.console-type-info {
+    color: #3498db;
+}
+
+.console-type-warn {
+    color: #f1c40f;
+}
+
+.console-type-error {
+    color: #e74c3c;
+}
+
+.console-message {
+    flex: 1;
+    word-break: break-word;
+}
+
+.console-object {
+    cursor: pointer;
+    color: #3498db;
+}
+
+.console-object:hover {
+    text-decoration: underline;
+}
+
+.console-stack {
+    color: #888888;
+    margin-left: 20px;
+    font-size: 11px;
+}
+
+.console-group {
+    margin-left: 20px;
+}
+
+.console-group-header {
+    cursor: pointer;
+    user-select: none;
+}
+
+.console-group-header:before {
+    content: '▼';
+    display: inline-block;
+    margin-right: 5px;
+    transform: rotate(-90deg);
+    transition: transform 0.2s;
+}
+
+.console-group.expanded .console-group-header:before {
+    transform: rotate(0);
+}
+
+.console-input {
+    display: flex;
+    padding: 5px;
+    border-top: 1px solid #3d3d3d;
+    background: #2d2d2d;
+}
+
+.console-prompt {
+    color: #3498db;
+    margin-right: 10px;
+    user-select: none;
+}
+
+.console-input input {
+    flex: 1;
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-family: 'Consolas', monospace;
+    font-size: 12px;
+}
+
+.console-input input:focus {
+    outline: none;
+}
+
+.console-suggestions {
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    right: 0;
+    background: #2d2d2d;
+    border: 1px solid #3d3d3d;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.console-suggestion {
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.console-suggestion:hover {
+    background: #3d3d3d;
+}
+
+.console-suggestion.selected {
+    background: #0066cc;
+}
+
+/* Scrollbar Styling */
+.console-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.console-content::-webkit-scrollbar-track {
+    background: #1e1e1e;
+}
+
+.console-content::-webkit-scrollbar-thumb {
+    background: #3d3d3d;
+    border-radius: 4px;
+}
+
+.console-content::-webkit-scrollbar-thumb:hover {
+    background: #4d4d4d;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.console-message {
+    animation: fadeIn 0.2s ease-out;
+}
